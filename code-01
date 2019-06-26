@@ -213,47 +213,24 @@ for(int t=0;t<501;t++){
         }
         //n=i;
 
-         int M=A[0].size();
-            for( l=0;l<25;l++){
+         for( l=0;l<25;l++){
                     vector< pair <double,int> > vect;
                     for( k=0;k<M;k++){
                         vect.push_back( make_pair(S[l][k],k) );
                     }
-                    sort(vect.begin(), vect.end());
+                    //sort(vect.begin(), vect.end());
                    double r=0.0;
                    for(int i=0;i<M;i++){
-                        if(vect[M-1-i].second==o){
-                            r=(i+1);
-                            break;
+                        if(vect[i].first>=vect[o].first && i!=o){
+                            r++;
+                            
                         }
                    }
-                   r=r/M;
+                   r=(r-1)/(M-1);
                    rnk[l][o]=r;
                    while (!vect.empty()){vect.pop_back();}
             }
          }
-    vector< pair <double,int> > vect2;
-    m=A[0].size();
-    double z=0;
-    double r;
-    r = (rand() % 1000) + 1;
-    double prob[m];
-    for(int i=0;i<m;i++){
-        r = (rand() % 1000) + 1;
-        prob[i]=r/1000;
-    }
-    for(int i=0;i<25;i++){
-        for(int j=0;j<m;j++){
-                z=z+(prob[j]*rnk[i][j]);
-            }
-            
-        vect2.push_back(make_pair(z/m,i));
-        z=0;
-        }
-    sort(vect2.begin(), vect2.end());
-    for(int j=0;j<vect2.size();j++){
-        fout<<vect2[j].first<<" "<<vect2[j].second<<endl;
-    }
     fout<<t<<" "<<endl;
     fin.close();
     int f=A.size();
