@@ -59,18 +59,12 @@ for(int t=0;t<501;t++){
     int n=A.size(),m=A[0].size();
     int o=0;
     double rnk[25][m];
-    double p[n];
     //main for loop
     for(o=0;o<m;o++){
         n=e.size();
         for(int k=0;k<n;k++){
-            if(A[k][o]==1){
-            	 p[k] = 0.2;
-			e[k]=1;}
-            else {
-			e[k]=0;
-			p[k]=1;
-		}
+            if(A[k][o]==1)e[k]=1;
+            else e[k]=0;
             }
         double E[m],N[m],Ef[m],Ep[m],Nf[m],Np[m];
         for( k=0;k<m;k++){
@@ -81,8 +75,6 @@ for(int t=0;t<501;t++){
                    if(A[l][k]==0 && e[l]==1) Np[k]++;
                    if(A[l][k]==0 && e[l]==0) Nf[k]++;
                 }
-                Ef[k] = p*Ef[K];
-                Ep[k] = Ep[k]+Ef[k](1-p);
                  N[k]=Nf[k]+Np[k];
                  E[k]=Ef[k]+Ep[k];
             }
@@ -213,7 +205,8 @@ for(int t=0;t<501;t++){
         }
         //n=i;
 
-         for( l=0;l<25;l++){
+         int M=A[0].size();
+            for( l=0;l<25;l++){
                     vector< pair <double,int> > vect;
                     for( k=0;k<M;k++){
                         vect.push_back( make_pair(S[l][k],k) );
@@ -221,16 +214,29 @@ for(int t=0;t<501;t++){
                     //sort(vect.begin(), vect.end());
                    double r=0.0;
                    for(int i=0;i<M;i++){
-                        if(vect[i].first>=vect[o].first && i!=o){
-                            r++;
-                            
-                        }
+                       if(vect[i].first>=vect[o].first && i!=o)
+                            r++;  
                    }
                    r=(r-1)/(M-1);
                    rnk[l][o]=r;
                    while (!vect.empty()){vect.pop_back();}
             }
          }
+    vector< pair <double,int> > vect2;
+    m=A[0].size();
+    double z=0;
+   
+    for(int i=0;i<25;i++){
+        for(int j=0;j<m;j++){
+                z=z+(rnk[i][j]);
+            }
+        vect2.push_back(make_pair(z/m,i));
+        z=0;
+        }
+    sort(vect2.begin(), vect2.end());
+    for(int j=0;j<vect2.size();j++){
+        fout<<vect2[j].first<<" "<<vect2[j].second<<endl;
+    }
     fout<<t<<" "<<endl;
     fin.close();
     int f=A.size();
