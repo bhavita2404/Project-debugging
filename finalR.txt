@@ -1,0 +1,17 @@
+x=read.csv(choose.files(),header=FALSE)
+mymat <- matrix(nrow=25, ncol=25)
+for (i in 1:25) {
+    for(j in 1:25){ 
+        vec<-1:500
+        for(k in 1:500){
+            vec[k]=x[i,k]-x[j,k]
+        }
+        vec<-vec[vec!=0]
+        if(length(vec)>0){
+            res<-wilcox.test(vec,alternative="greater",mu=0)
+            mymat[i,j]=res$p.value
+            show(vec)}
+        else mymat[i,j]=0
+    }
+}
+write.csv(mymat,file=choose.files())
