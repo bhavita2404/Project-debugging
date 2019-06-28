@@ -1,0 +1,18 @@
+No, Shapiro-wilk test tests for normality of a distribution. You should
+use one sided Wilcoxon Sign Rank test.
+
+Assume that X is a vector containing the mean values that you compute for
+all the activity matrices using fault localization metric P and Y is a
+vector containing the same using metric Q.
+
+Now, you want to test whether P is statistically better than Q. For any
+matrix i, if Xi is lesser than Yi, then it means P performs better than Q
+for matrix i. So, if P is better than Q, ideally the vector (Y-X) should
+contain all positive values.
+
+So, you want to test the null hypothesis that the median of (Y-X) is less
+than or equal to 0 against the alternate hypothesis that it is greater
+than 0.
+
+You can use library calls in Matlab or R where you can plug in X and Y and
+get the p-value.
