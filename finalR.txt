@@ -7,8 +7,8 @@ for (i in 1:25) {
         x<-1:500
         y<-1:500
         for(k in 1:500){
-            x=z[i,k]
-            y=z[j,k]
+            x[k]=z[i,k]
+            y[k]=z[j,k]
         }
         medianx = median(x,n.rm=TRUE)
         mediany = median(y,n.rm=TRUE)
