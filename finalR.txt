@@ -1,4 +1,4 @@
-x=read.csv(choose.files(),header=FALSE)
+z=read.csv(choose.files(),header=FALSE)
 mymat <- matrix(nrow=25, ncol=25)
 for (i in 1:25) {
   for(j in 1:25){ 
