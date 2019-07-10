@@ -1,19 +1,15 @@
-z=read.csv(choose.files(),header=FALSE)
+x=read.csv(choose.files(),header=FALSE)
 mymat <- matrix(nrow=25, ncol=25)
-medianx <-1:25
-mediany <-1:25
 for (i in 1:25) {
-    for(j in 1:25){ 
-        x<-1:500
-        y<-1:500
-        for(k in 1:500){
-            x[k]=z[i,k]
-            y[k]=z[j,k]
-        }
-        medianx = median(x,n.rm=TRUE)
-        mediany = median(y,n.rm=TRUE)
-            res<-wilcox.test(medianx,mediany,paired = TRUE,alternative="greater")
-            mymat[i,j]=res$p.value
+  for(j in 1:25){ 
+    x<-1:500
+    y<-1:500
+    for(k in 1:500){
+      x[k]=z[i,k]
+      y[k]=z[j,k]
     }
+    res<-wilcox.test(x,y,alternative="greater",mu=0)
+    mymat[i,j]=res$p.value
+  }
 }
 write.csv(mymat,file=choose.files())
